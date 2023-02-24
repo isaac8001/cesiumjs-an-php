@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D GIS</title>
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.79.1/Build/Cesium/Cesium.js"></script>
+    <link
+      href="https://cesium.com/downloads/cesiumjs/releases/1.79.1/Build/Cesium/Widgets/widgets.css"
+      rel="stylesheet"
+    />
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #buttonbox {
+        z-index: 1;
+        position: fixed;
+        top: 5px;
+      }
+      #toggle-building {
+        margin-left: 3px;
+      }
+      #makebox {
+        margin-left: 3px;
+      }
+      #deletebox {
+        margin-left: 3px;
+      }
+    </style>
+    <script defer src="cesium.js"></script>
+  </head>
+  <body>
+    <div id="cesiumContainer" class="fullSize"></div>
+    <div id="buttonbox">
+      <button id="toggle-building">Toggle new building</button>
+      <!-- <button id="click" onclick="clickGeoJSON()">GeoJSON 그리기</button> -->
+      <!-- boxNum, x, y, h, latitude, longitude, z, color1, color2, color3 -->
+      <button
+        id="makebox"
+        onclick="makeBox(prompt('박스의 갯수를 입력하세요 (최대 100개 이하로 입력하세요)'),prompt('박스의 가로 길이(m)를 입력하세요'),prompt('박스의 세로 길이(m)를 입력하세요'),prompt('박스의 높이(m)를 입력하세요'),127.39491, 36.41944,prompt('땅에서 몇 m의 높이부터 박스를 그릴지 입력하세요'), 'skyblue','yellow','red')"
+      >
+        Make box
+      </button>
+      <form id="frm" enctype="mutipart/form-data">
+        <input name="attach" id="fileInput" type="file" accept=".glb" />
+        <input type="button" value="파일 업로드" onclick="upload()" />
+      </form>
+    </div>
+  </body>
+</html>
+
+<script>
+  // 파일 불러오기
+  const frm = document.getElementById("frm");
+  function upload() {
+    const formData = new FormData(frm);
+    fetch("upload.php", {
+      method: "post",
+      body: formData,
+    })
+      .then(function (response) {
+        return response.text();
+      })
+      .then(function (text) {
+        if (text != "fail") loadModel(text);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+</script>
