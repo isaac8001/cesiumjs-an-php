@@ -24,3 +24,5 @@ if(isset($_FILES['attach'])){
        print_r($errors);
     }
  }
+?>
+ 

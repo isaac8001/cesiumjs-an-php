@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#buttonbox {
+  background-color: black;
+  opacity: 0.7;
+  padding: 10px;
+  margin-left: 5px;
+  border-radius: 10px;
+  z-index: 1;
+  position: fixed;
+  top: 5px;
+}
+
+#toggle-building:hover {
+  cursor: pointer;
+}
+
+#makebox {
+  margin-left: 3px;
+}
+
+#makebox:hover {
+  cursor: pointer;
+}
+
+#frm {
+  margin-top: 10px;
+}
+
+#fileInput {
+  color: #fff;
+}
+
+#fileupload:hover {
+  cursor: pointer;
+}

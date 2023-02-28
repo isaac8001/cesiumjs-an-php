@@ -10,26 +10,7 @@
       href="https://cesium.com/downloads/cesiumjs/releases/1.79.1/Build/Cesium/Widgets/widgets.css"
       rel="stylesheet"
     />
-    <style type="text/css">
-      * {
-        margin: 0;
-        padding: 0;
-      }
-      #buttonbox {
-        z-index: 1;
-        position: fixed;
-        top: 5px;
-      }
-      #toggle-building {
-        margin-left: 3px;
-      }
-      #makebox {
-        margin-left: 3px;
-      }
-      #deletebox {
-        margin-left: 3px;
-      }
-    </style>
+    <link rel="stylesheet" href="common.css" />
     <script defer src="cesium.js"></script>
   </head>
   <body>
@@ -44,9 +25,14 @@
       >
         Make box
       </button>
-      <form id="frm" enctype="mutipart/form-data">
+      <form id="frm" enctype="mutipart/form-data" method="post">
         <input name="attach" id="fileInput" type="file" accept=".glb" />
-        <input type="button" value="파일 업로드" onclick="upload()" />
+        <input
+          type="button"
+          id="fileupload"
+          value="파일 업로드"
+          onclick="upload()"
+        />
       </form>
     </div>
   </body>
@@ -56,6 +42,8 @@
   // 파일 불러오기
   const frm = document.getElementById("frm");
   function upload() {
+    // const url = "./upload.php";
+    // const url = "http://222.239.231.144:8080/isaac/cesiumjs/upload.php";
     const formData = new FormData(frm);
     fetch("upload.php", {
       method: "post",
